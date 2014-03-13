@@ -4,3 +4,5 @@ Bots, Inc
 An e-commerce website where everything is delivered by robots.
 
 Used for teaching purposes.
+
+Beep boop!
