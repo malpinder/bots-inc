@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140311175757) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "basket_items", force: true do |t|
     t.integer  "basket_id"
     t.integer  "item_id"
@@ -20,8 +23,8 @@ ActiveRecord::Schema.define(version: 20140311175757) do
     t.datetime "updated_at"
   end
 
-  add_index "basket_items", ["basket_id"], name: "index_basket_items_on_basket_id"
-  add_index "basket_items", ["item_id"], name: "index_basket_items_on_item_id"
+  add_index "basket_items", ["basket_id"], name: "index_basket_items_on_basket_id", using: :btree
+  add_index "basket_items", ["item_id"], name: "index_basket_items_on_item_id", using: :btree
 
   create_table "baskets", force: true do |t|
     t.integer  "user_id"
@@ -29,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140311175757) do
     t.datetime "updated_at"
   end
 
-  add_index "baskets", ["user_id"], name: "index_baskets_on_user_id"
+  add_index "baskets", ["user_id"], name: "index_baskets_on_user_id", using: :btree
 
   create_table "deliveries", force: true do |t|
     t.integer  "purchase_id"
@@ -39,8 +42,8 @@ ActiveRecord::Schema.define(version: 20140311175757) do
     t.datetime "updated_at"
   end
 
-  add_index "deliveries", ["purchase_id"], name: "index_deliveries_on_purchase_id"
-  add_index "deliveries", ["robot_id"], name: "index_deliveries_on_robot_id"
+  add_index "deliveries", ["purchase_id"], name: "index_deliveries_on_purchase_id", using: :btree
+  add_index "deliveries", ["robot_id"], name: "index_deliveries_on_robot_id", using: :btree
 
   create_table "items", force: true do |t|
     t.string   "name"
@@ -61,8 +64,8 @@ ActiveRecord::Schema.define(version: 20140311175757) do
     t.datetime "updated_at"
   end
 
-  add_index "purchases", ["basket_id"], name: "index_purchases_on_basket_id"
-  add_index "purchases", ["user_id"], name: "index_purchases_on_user_id"
+  add_index "purchases", ["basket_id"], name: "index_purchases_on_basket_id", using: :btree
+  add_index "purchases", ["user_id"], name: "index_purchases_on_user_id", using: :btree
 
   create_table "robots", force: true do |t|
     t.string   "name"
@@ -85,7 +88,7 @@ ActiveRecord::Schema.define(version: 20140311175757) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
